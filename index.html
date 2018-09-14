@@ -1,0 +1,160 @@
+<!--
+Application: Civ Online
+File: Home page
+Date: 8/4/14
+Author: John Andersen
+(c) Copyright 2014 All rights reserved
+-->
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en" oncontextmenu="return false;" > <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en" oncontextmenu="return false;" > <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en" oncontextmenu="return false;" > <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en" oncontextmenu="return false;" > <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Civ Online</title>
+	<meta name="title" content="Civ Online">
+	<meta name="description" content="Turn based empire building game">
+	<meta name="author" content="John Andersen">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="stylesheets/base.css">
+	<link rel="stylesheet" href="stylesheets/skeleton.css">
+	<link rel="stylesheet" href="stylesheets/layout.css">
+	<!-- <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css"> -->
+
+	<!--[if lt IE 9]>
+		<script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+	<!-- Scripts
+	================================================== -->
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/pouchdb.js"></script>
+	<!-- // <script src="https://cdn.sockjs.org/sockjs-0.3.min.js"></script> -->
+<!-- 
+	<script src="//pdxjohnny.tk:5984/_utils/script/json2.js"></script>
+	<script src="//pdxjohnny.tk:5984/_utils/script/sha1.js"></script>
+	<script src="//pdxjohnny.tk:5984/_utils/script/jquery.js?1.4.2"></script>
+	<script src="//pdxjohnny.tk:5984/_utils/script/jquery.couch.js?0.11.0"></script>
+	<script src="//pdxjohnny.tk:5984/_utils/script/jquery.dialog.js?0.11.0"></script>
+ -->
+	<script src="js/game.js"></script>
+	<script src="js/db.js"></script>
+	<script src="js/ui.js"></script>
+	<script src="js/unit.js"></script>
+	<script src="js/player.js"></script>
+	<script src="js/unit_actions.js"></script>
+	<script src="js/city.js"></script>
+	<script src="js/city_actions.js"></script>
+	<script src="js/tech.js"></script>
+	<script src="js/ui_tech.js"></script>
+	<script src="js/base_db.js"></script>
+
+	<script src="js/HexagonTools.js"></script>
+	<script src="js/Grid.js"></script>
+
+</head>
+<body>
+
+	<!-- Primary Page Layout
+	================================================== -->
+
+<canvas id="hexCanvas" style="dispay: none; position: absolute; top: 0px; left: 0px;" ></canvas>
+
+	<div id="main" class="container" style="top: 30px; z-index:990; background-color: rgba(255, 255, 255, 0.7);">
+
+		<h1>Civ Online</h1>
+
+		<hr />
+
+		<a href="#" id="toggleLogin" >Login</a>
+		<a href="#" id="toggleRegister" >Register</a>
+		<a href="#" id="toggleOptions" >Options</a>
+		<a href="#" id="toggleOnlineGames" >Active Games</a>
+		<a href="#" style="float:right;" onclick="location.href = '';" >Logout</a>
+
+		<center>
+			<span style="color: #4593C4; margin-top:10px;" id='returnSpan'></span>
+		</center>
+
+		<hr />
+
+		<div id="registerdiv" style="display:none;" >
+			<form id="resisterForm" style="display: table; margin: 0 auto;">
+					Username: <input id="register_username" placeholder="username" />
+					<br>
+					Password: <input id="register_password" placeholder="password" type="password" />
+					<br>
+					Confirm Password: <input id="comfirm_password" placeholder="comfirm password" type="password" />
+					<br>
+					<center>
+						<input type="submit" value="Sign Up" />
+					</center>
+			</form>
+		</div>
+
+		<div id="logindiv" >
+			<div id="logindiv_contents" style="display: table; margin: 0 auto;">
+				Map height: <input id="map_height" type="number" value="8" />
+				<br>
+				Map width: <input id="map_width" type="number" value="14" />
+				<br>
+				Nation: <select id="nation" ></select>
+				<br>
+				Color: <input id="color" placeholder="color" value="red" />
+				<br>
+				Game name: <input id="game_name" placeholder="Game name" value="Test" />
+				<br>
+				Username: <input id="username" placeholder="username" value="pdxjohnny" />
+				<br>
+				Password: <input id="password" placeholder="password" type="password" />
+				<center>
+					<button onclick="game.start();" >Start</button>
+				</center>
+			</div>
+		</div>
+
+		<div id="optionsdiv" style="display:none;"  >
+			<div id="optionsdiv_contents" style="display: table; margin: 0 auto;">
+			</div>
+		</div>
+
+		<div id="online_games_div" style="display:none;"  >
+			<div id="online_games_div_contents" style="display: table; margin: 0 auto;">
+			</div>
+		</div>
+
+	</div><!-- container -->
+
+
+<!-- End Document
+================================================== -->
+</body>
+
+<script type="text/javascript" src="js/index.js" ></script>
+
+<style type="text/css">
+body {
+	overflow:hidden;
+	}
+</style>
+
+</html>
